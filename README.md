@@ -12,6 +12,18 @@ python3 -m http.server 8000
 
 Buka `http://localhost:8000` di browser.
 
+## Hosting di domain
+
+Workflow GitHub Actions di `.github/workflows/static.yml` menerbitkan aplikasi melalui GitHub Pages. File `CNAME` menyiapkan domain kustom `tptweb1.ct.ws` untuk deployment berikutnya.
+
+Agar domain membuka aplikasi, atur `tptweb1.ct.ws` sebagai Custom domain di **Settings → Pages** repositori dan tambahkan DNS record berikut di penyedia domain:
+
+| Jenis | Nama/Host | Target |
+| --- | --- | --- |
+| CNAME | `tptweb1` | `haikyutsukiis-cmd.github.io` |
+
+Setelah DNS diperbarui, tunggu propagasi lalu aktifkan HTTPS di pengaturan GitHub Pages. Domain dan hosting hanya menerbitkan frontend; data aplikasi masih tersimpan di `localStorage` browser sampai backend bersama dikonfigurasi.
+
 ## Fitur prototype
 
 - Tampilan terpisah Admin (semua menu), Boss (dashboard/laporan baca-saja), dan Operator (input sendiri/tools). Kata sandi Admin dan Boss disiapkan terpisah saat pertama kali dipilih; Operator memilih profil operator.
