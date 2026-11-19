@@ -12,17 +12,23 @@ python3 -m http.server 8000
 
 Buka `http://localhost:8000` di browser.
 
-## Hosting di domain
+## Hosting di subdomain `nisatpt1.page.gd`
 
-Workflow GitHub Actions di `.github/workflows/static.yml` menerbitkan aplikasi melalui GitHub Pages. File `CNAME` menyiapkan domain kustom `tptweb1.ct.ws` untuk deployment berikutnya.
+Aplikasi ini berupa file statis dan dapat diunggah ke hosting tanpa proses build atau instalasi paket. Salin `index.html`, `app.js`, dan `styles.css` ke folder `/htdocs` hosting.
 
-Agar domain membuka aplikasi, atur `tptweb1.ct.ws` sebagai Custom domain di **Settings → Pages** repositori dan tambahkan DNS record berikut di penyedia domain:
+Arahkan subdomain ke server hosting melalui panel DNS penyedia domain dengan record berikut:
 
 | Jenis | Nama/Host | Target |
 | --- | --- | --- |
-| CNAME | `tptweb1` | `haikyutsukiis-cmd.github.io` |
+| A | `nisatpt1` | `185.27.134.205` |
 
-Setelah DNS diperbarui, tunggu propagasi lalu aktifkan HTTPS di pengaturan GitHub Pages. Domain dan hosting hanya menerbitkan frontend; data aplikasi masih tersimpan di `localStorage` browser sampai backend bersama dikonfigurasi.
+Jika panel DNS meminta nama lengkap, gunakan `nisatpt1.page.gd`. Hapus record lain yang konflik untuk subdomain tersebut. Perubahan DNS dan unggah file harus dilakukan melalui panel penyedia domain/hosting; setelah propagasi DNS, aktifkan SSL/HTTPS di panel hosting. Aplikasi memerlukan HTTPS atau localhost agar Web Crypto tersedia.
+
+## Alternatif: GitHub Pages
+
+Workflow GitHub Actions di `.github/workflows/static.yml` menerbitkan aplikasi melalui GitHub Pages pada alamat `haikyutsukiis-cmd.github.io`. Domain `nisatpt1.page.gd` tetap diarahkan ke hosting eksternal melalui record A di atas; jangan atur sebagai Custom domain GitHub Pages kecuali DNS domain dipindahkan ke GitHub Pages.
+
+Domain dan hosting hanya menerbitkan frontend; data aplikasi masih tersimpan di `localStorage` browser sampai backend bersama dikonfigurasi.
 
 ## Fitur prototype
 
